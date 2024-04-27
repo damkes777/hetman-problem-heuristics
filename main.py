@@ -11,17 +11,17 @@ if __name__ == '__main__':
 
 	while open_queue:
 		priority, hetmans_array = heapq.heappop(open_queue)
-		het.visited_counter += 1
 
 		if len(hetmans_array) <= het.size:
+			het.visited_counter += 1
 			if het.check_correct(hetmans_array):
 				het.solutions.extend([hetmans_array])
 
-			children = het.generate_children(hetmans_array)
-
-			for child in children:
-				hetman_heuristics = heuristics.calculate_heuristics(child)
-				heapq.heappush(open_queue, (hetman_heuristics, child))
+			if len(hetmans_array) != het.size:
+				children = het.generate_children(hetmans_array)
+				for child in children:
+					hetman_heuristics = heuristics.calculate_heuristics(child)
+					heapq.heappush(open_queue, (hetman_heuristics, child))
 
 	print(het.solutions)
 	print(het.generated_counter)
