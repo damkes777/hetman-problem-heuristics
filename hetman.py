@@ -3,6 +3,7 @@ class Hetman:
 		self.size = size
 		self.visited_counter = 0
 		self.generated_counter = 0
+		self.solutions = []
 
 	def generate_children(self, parent):
 		children = []
@@ -24,6 +25,8 @@ class Hetman:
 
 		if not self.check_diagonal(to_check):
 			return False
+
+		return True
 
 	def check_hetman(self, to_check):
 		return len(to_check) == self.size
