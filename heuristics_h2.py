@@ -1,27 +1,28 @@
 class HeuristicsH2:
-	def __init__(self, hetmans, size):
-		self.hetmans = hetmans
+	def __init__(self, size):
 		self.size = size
 
-	def calculate_heuristics(self):
-		row_beating = self.beating_in_row()
-		diagonal_beating = self.beating_in_diagonal()
+	def calculate_heuristics(self, hetmans):
+		row_beating = self.beating_in_row(hetmans)
+		diagonal_beating = self.beating_in_diagonal(hetmans)
 
-		heuristics = (row_beating + diagonal_beating) + (self.size - len(self.hetmans))
+		heuristics = (row_beating + diagonal_beating) + (self.size - len(hetmans))
 
 		return heuristics
 
-	def beating_in_row(self):
-		beating = (abs(len(self.hetmans) - len(set(self.hetmans)))) * 2
+	@staticmethod
+	def beating_in_row(hetmans):
+		beating = (abs(len(hetmans) - len(set(hetmans)))) * 2
 
 		return beating
 
-	def beating_in_diagonal(self):
+	@staticmethod
+	def beating_in_diagonal(hetmans):
 		beating = 0
 
-		for i in range(len(self.hetmans)):
-			for j in range(i + 1, len(self.hetmans)):
-				if abs(self.hetmans[i] - self.hetmans[j]) == abs(i - j):
+		for i in range(len(hetmans)):
+			for j in range(i + 1, len(hetmans)):
+				if abs(hetmans[i] - hetmans[j]) == abs(i - j):
 					beating += 1
 
 		return beating
